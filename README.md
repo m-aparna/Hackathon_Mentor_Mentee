@@ -55,8 +55,17 @@ FLUSH PRIVILEGES;
 
 # Mentorship Endpoints(Mentor <-> Mentee):
 
+Mentorship is the relationship layer
 
+It answers questions like:
 
+Which mentor is assigned to which mentee?
+
+Is this mentorship active or ended?
+
+When did the mentorship start?
+
+![Mentor Endpoints](assets/mentorship_endpoints.png)
 
 # Goals Endpoints:
 
