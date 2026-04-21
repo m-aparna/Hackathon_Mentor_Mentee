@@ -22,12 +22,12 @@ def create_mentee(payload: MenteeCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=List[MenteeResponse])
 def list_mentees(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return db.query(mentee).offset(skip).limit(limit).all()
+    return db.query(Mentee).offset(skip).limit(limit).all()
 
 
 @router.get("/{mentee_id}", response_model=MenteeResponse)
 def get_mentee(mentee_id: int, db: Session = Depends(get_db)):
-    mentee = db.query(mentee).filter(mentee.id == mentee_id).first()
+    mentee = db.query(Mentee).filter(Mentee.id == mentee_id).first()
     if not mentee:
         raise HTTPException(status_code=404, detail="mentee not found")
     return mentee
@@ -35,7 +35,7 @@ def get_mentee(mentee_id: int, db: Session = Depends(get_db)):
 
 @router.patch("/{mentee_id}", response_model=MenteeResponse)
 def update_mentee(mentee_id: int, payload: MenteeUpdate, db: Session = Depends(get_db)):
-    mentee = db.query(mentee).filter(mentee.id == mentee_id).first()
+    mentee = db.query(Mentee).filter(Mentee.id == mentee_id).first()
     if not mentee:
         raise HTTPException(status_code=404, detail="mentee not found")
     for field, value in payload.model_dump(exclude_none=True).items():
@@ -47,7 +47,7 @@ def update_mentee(mentee_id: int, payload: MenteeUpdate, db: Session = Depends(g
 
 @router.delete("/{mentee_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_mentee(mentee_id: int, db: Session = Depends(get_db)):
-    mentee = db.query(mentee).filter(mentee.id == mentee_id).first()
+    mentee = db.query(Mentee).filter(Mentee.id == mentee_id).first()
     if not mentee:
         raise HTTPException(status_code=404, detail="mentee not found")
     db.delete(mentee)
