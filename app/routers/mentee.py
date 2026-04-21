@@ -10,10 +10,10 @@ router = APIRouter(prefix="/mentees", tags=["mentees"])
 
 @router.post("/", response_model=MenteeResponse, status_code=status.HTTP_201_CREATED)
 def create_mentee(payload: MenteeCreate, db: Session = Depends(get_db)):
-    existing = db.query(Mentee).filter(mentee.email == payload.email).first()
+    existing = db.query(Mentee).filter(Mentee.email == payload.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
-    mentee = mentee(**payload.model_dump())
+    mentee = Mentee(**payload.model_dump())
     db.add(mentee)
     db.commit()
     db.refresh(mentee)
