@@ -42,6 +42,26 @@ GRANT ALL PRIVILEGES ON mentorship_db.* TO 'mentorship_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
+# Mentee Endpoints:
 
 
 ![Mentee Endpoints](image.png)
+
+
+# Mentor Endpoints:
+
+![Mentor Endpoints](image-1.png)
+
+
+# Mentorship Endpoints(Mentor <-> Mentee):
+
+
+
+
+# Goals Endpoints:
+
+
+# Resource Endpoints:(Optional)
+
+
+# Skill Endpoints:(Optional)

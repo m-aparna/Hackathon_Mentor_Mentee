@@ -30,7 +30,8 @@ def get_db():
 def create_tables():
     """Create all tables in the database."""
     from models import (
-        mentee
+        mentee,
+        mentor
     )
 
     Base.metadata.create_all(bind=engine)
