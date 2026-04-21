@@ -1,4 +1,24 @@
 # Hackathon_Mentor_Mentee
 
->> git init
->> git remote add origin https://github.com/m-aparna/Hackathon_Mentor_Mentee.git
+1.Create venv:
+    py -3.12 -m venv .venv
+    python -m venv .venv
+2. Activate it:
+    .\\.venv\Scripts\activate.ps1
+3. Install packages 
+    pip install -r requirements.txt
+4. Run
+    uvicorn main:app --reload
+
+
+ 
+
+# Create DB and configuration 
+CREATE DATABASE IF NOT EXISTS mentorship_db
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'mentorship_user'@'localhost' IDENTIFIED BY 'mentorship_pass';
+GRANT ALL PRIVILEGES ON mentorship_db.* TO 'mentorship_user'@'localhost';
+FLUSH PRIVILEGES;
+
