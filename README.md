@@ -45,12 +45,12 @@ FLUSH PRIVILEGES;
 # Mentee Endpoints:
 
 
-![Mentee Endpoints](image.png)
+![Mentee Endpoints](assets/mentee_endpoints.png)
 
 
 # Mentor Endpoints:
 
-![Mentor Endpoints](image-1.png)
+![Mentor Endpoints](assets/mentor_endpoints.png)
 
 
 # Mentorship Endpoints(Mentor <-> Mentee):
