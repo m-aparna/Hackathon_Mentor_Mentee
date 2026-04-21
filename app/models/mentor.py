@@ -20,10 +20,10 @@ class Mentor(Base):
 
     # # Relationships
     # skills = relationship("UserSkill", back_populates="user", cascade="all, delete-orphan")
-    # mentorships_as_mentor = relationship(
-    #     "Mentorship", foreign_keys="Mentorship.mentor_id", back_populates="mentor"
-    # )
-    # mentorships_as_mentor = relationship(
+    mentorship_as_mentor = relationship(
+        "Mentorship", foreign_keys="Mentorship.mentor_id", back_populates="mentor"
+    )
+    # mentorship_as_mentor = relationship(
     #     "Mentorship", foreign_keys="Mentorship.mentor_id", back_populates="mentor"
     # )
     # goals = relationship("Goal", back_populates="mentor", cascade="all, delete-orphan")
