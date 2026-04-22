@@ -23,3 +23,4 @@ class Mentorship(Base):
     # Relationships
     mentor = relationship("Mentor", foreign_keys=[mentor_id], back_populates="mentorship_as_mentor")
     mentee = relationship("Mentee", foreign_keys=[mentee_id], back_populates="mentorship_as_mentee")
+    goals = relationship("Goal", back_populates="mentorship", cascade="all, delete-orphan")

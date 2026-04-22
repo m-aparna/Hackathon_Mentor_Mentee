@@ -20,10 +20,6 @@ class Mentee(Base):
 
     # # Relationships
     # skills = relationship("UserSkill", back_populates="user", cascade="all, delete-orphan")
-    # mentorship_as_mentor = relationship(
-    #     "Mentorship", foreign_keys="Mentorship.mentor_id", back_populates="mentor"
-    # )
     mentorship_as_mentee = relationship(
         "Mentorship", foreign_keys="Mentorship.mentee_id", back_populates="mentee"
     )
-    # goals = relationship("Goal", back_populates="mentee", cascade="all, delete-orphan")

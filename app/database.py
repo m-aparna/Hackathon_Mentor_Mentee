@@ -32,7 +32,8 @@ def create_tables():
     from models import (
         mentee,
         mentor,
-        mentorship
+        mentorship,
+        goal
     )
 
     Base.metadata.create_all(bind=engine)
