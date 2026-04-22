@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from database import create_tables
-from routers import mentee, mentor, mentorship
+from routers import mentee, mentor, mentorship, goal
 
 app = FastAPI(
     title="Mentor-Mentee Growth Platform",
@@ -21,6 +21,7 @@ def on_startup():
 app.include_router(mentee.router)
 app.include_router(mentor.router)
 app.include_router(mentorship.router)
+app.include_router(goal.router)
 
 # Swagger spec with base url 
 @app.get("/", tags=["Health"])
