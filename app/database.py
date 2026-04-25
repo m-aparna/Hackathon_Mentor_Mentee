@@ -33,7 +33,8 @@ def create_tables():
         mentee,
         mentor,
         mentorship,
-        goal
+        goal,
+        resource
     )
 
     Base.metadata.create_all(bind=engine)

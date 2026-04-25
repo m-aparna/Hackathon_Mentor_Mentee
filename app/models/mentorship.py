@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Date, Enum
 from sqlalchemy.orm import relationship
 from database import Base
+from models.resource import mentorship_resources
 import enum
 import datetime
 
@@ -24,3 +25,4 @@ class Mentorship(Base):
     mentor = relationship("Mentor", foreign_keys=[mentor_id], back_populates="mentorship_as_mentor")
     mentee = relationship("Mentee", foreign_keys=[mentee_id], back_populates="mentorship_as_mentee")
     goals = relationship("Goal", back_populates="mentorship", cascade="all, delete-orphan")
+    resources = relationship("Resource",secondary=mentorship_resources,back_populates="mentorships")
