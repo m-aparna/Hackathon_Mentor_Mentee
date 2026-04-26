@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
-from models.mentor import UserRole
+from app.models.mentor import UserRole
 
 
 class MentorCreate(BaseModel):
