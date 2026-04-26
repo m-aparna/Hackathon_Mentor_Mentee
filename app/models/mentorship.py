@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Date, Enum
 from sqlalchemy.orm import relationship
-from database import Base
-from models.resource import mentorship_resources
+from app.database import Base
+from app.models.resource import mentorship_resources
 import enum
 import datetime
 

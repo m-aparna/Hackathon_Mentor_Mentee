@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from routers import resource
-from database import create_tables
-from routers import mentee, mentor, mentorship, goal,resource, mentorship_resource
-from models.resource import mentorship_resources
+from app.routers import resource
+from app.database import create_tables
+from app.routers import mentee, mentor, mentorship, goal, resource, mentorship_resource
+from app.models.resource import mentorship_resources
 
 app = FastAPI(
     title="Mentor-Mentee Growth Platform",

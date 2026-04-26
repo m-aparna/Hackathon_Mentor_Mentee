@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from database import get_db
-from models.resource import Resource
-from models.mentorship import Mentorship
-from schemas.resource import ResourceResponse
+from app.database import get_db
+from app.models.resource import Resource
+from app.models.mentorship import Mentorship
+from app.schemas.resource import ResourceResponse
 
 router = APIRouter(prefix="/mentorship", tags=["Mentorship Resources"])
 

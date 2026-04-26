@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
-from models.mentor import Mentor
-from schemas.mentor import MentorCreate, MentorUpdate, MentorResponse
+from app.database import get_db
+from app.models.mentor import Mentor
+from app.schemas.mentor import MentorCreate, MentorUpdate, MentorResponse
 
 router = APIRouter(prefix="/mentors", tags=["mentors"])
 
@@ -13,7 +13,7 @@ def create_mentor(payload: MentorCreate, db: Session = Depends(get_db)):
     existing = db.query(Mentor).filter(Mentor.email == payload.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
-    mentor = Mentor(**payload.model_dump())
+    mentor = Mentor(**payload.model_dump(exclude={"skills"}))
     db.add(mentor)
     db.commit()
     db.refresh(mentor)
@@ -38,7 +38,7 @@ def update_mentor(mentor_id: int, payload: MentorUpdate, db: Session = Depends(g
     mentor = db.query(Mentor).filter(Mentor.id == mentor_id).first()
     if not mentor:
         raise HTTPException(status_code=404, detail="mentor not found")
-    for field, value in payload.model_dump(exclude_none=True).items():
+    for field, value in payload.model_dump(exclude_none=True, exclude={"skills"}).items():
         setattr(mentor, field, value)
     db.commit()
     db.refresh(mentor)

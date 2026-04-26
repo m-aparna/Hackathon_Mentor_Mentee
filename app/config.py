@@ -1,14 +1,13 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
+from pydantic import Field
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "mysql+pymysql://root:password@localhost:3306/mentorship_db"
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    DATABASE_URL: str = Field(..., description="Database connection string")
     SECRET_KEY: str = "changeme"
     DEBUG: bool = True
-
-    class Config:
-        env_file = ".env"
 
 
 @lru_cache()
