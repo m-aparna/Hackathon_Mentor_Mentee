@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
-from models.mentor import Mentor
-from schemas.mentor import MentorCreate, MentorUpdate, MentorResponse
+from app.database import get_db
+from app.models.mentor import Mentor
+from app.schemas.mentor import MentorCreate, MentorUpdate, MentorResponse
 
 router = APIRouter(prefix="/mentors", tags=["mentors"])
 

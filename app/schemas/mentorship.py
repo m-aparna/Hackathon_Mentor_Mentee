@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 import datetime
-from models.mentorship import MentorshipStatus
+from app.models.mentorship import MentorshipStatus
 
 
 class MentorshipCreate(BaseModel):

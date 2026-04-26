@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
-from models.mentorship import Mentorship
-from models.goal import Goal, ProgressLog
-from schemas.goal import (
+from app.database import get_db
+from app.models.mentorship import Mentorship
+from app.models.goal import Goal, ProgressLog
+from app.schemas.goal import (
     GoalCreate, GoalUpdate, GoalResponse,
     ProgressLogCreate, ProgressLogResponse,
 )

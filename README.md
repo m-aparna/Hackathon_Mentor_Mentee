@@ -58,12 +58,14 @@ Pydantic validation, designed for easy extension and testing.
 ```bash
     cd app
     uvicorn main:app --reload
+    uvicorn app.main:app --reload
 ```
 
  Visit **http://localhost:8000/docs** for the interactive Swagger UI.
 
 
  ## Database Setup (MySQL) Create DB and configuration
+mysql -u root -p
 
 Tables are created automatically by SQLAlchemy on startup (`create_tables()` in `main.py`).  
 You only need to create the database and user once:

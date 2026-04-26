@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from config import get_settings
+from app.config import get_settings
 
 settings = get_settings()
 
@@ -29,7 +29,7 @@ def get_db():
 
 def create_tables():
     """Create all tables in the database."""
-    from models import (
+    from app.models import (
         mentee,
         mentor,
         mentorship,

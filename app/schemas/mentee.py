@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
-from models.mentee import UserRole
+from app.models.mentee import UserRole
 
 
 class MenteeCreate(BaseModel):

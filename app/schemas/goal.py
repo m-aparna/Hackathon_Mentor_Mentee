@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from models.goal import GoalStatus
+from app.models.goal import GoalStatus
 
 
 class GoalCreate(BaseModel):

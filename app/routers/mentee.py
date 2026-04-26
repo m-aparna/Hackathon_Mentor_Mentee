@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
-from models.mentee import Mentee
-from schemas.mentee import MenteeCreate, MenteeUpdate, MenteeResponse
+from app.database import get_db
+from app.models.mentee import Mentee
+from app.schemas.mentee import MenteeCreate, MenteeUpdate, MenteeResponse
 
 router = APIRouter(prefix="/mentees", tags=["mentees"])
 

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
-from models.resource import Resource
-from schemas.resource import ResourceCreate, ResourceUpdate, ResourceResponse
+from app.database import get_db
+from app.models.resource import Resource
+from app.schemas.resource import ResourceCreate, ResourceUpdate, ResourceResponse
 
 router = APIRouter(prefix="/resources", tags=["Resources"])
 
