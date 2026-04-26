@@ -13,7 +13,7 @@ def create_mentor(payload: MentorCreate, db: Session = Depends(get_db)):
     existing = db.query(Mentor).filter(Mentor.email == payload.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
-    mentor = Mentor(**payload.model_dump(exclude={"skills"}))
+    mentor = Mentor(**payload.model_dump())
     db.add(mentor)
     db.commit()
     db.refresh(mentor)
@@ -38,7 +38,7 @@ def update_mentor(mentor_id: int, payload: MentorUpdate, db: Session = Depends(g
     mentor = db.query(Mentor).filter(Mentor.id == mentor_id).first()
     if not mentor:
         raise HTTPException(status_code=404, detail="mentor not found")
-    for field, value in payload.model_dump(exclude_none=True, exclude={"skills"}).items():
+    for field, value in payload.model_dump(exclude_none=True).items():
         setattr(mentor, field, value)
     db.commit()
     db.refresh(mentor)

@@ -13,7 +13,7 @@ def create_mentee(payload: MenteeCreate, db: Session = Depends(get_db)):
     existing = db.query(Mentee).filter(Mentee.email == payload.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
-    mentee = Mentee(**payload.model_dump(exclude={"skills"}))
+    mentee = Mentee(**payload.model_dump())
     db.add(mentee)
     db.commit()
     db.refresh(mentee)
@@ -38,7 +38,7 @@ def update_mentee(mentee_id: int, payload: MenteeUpdate, db: Session = Depends(g
     mentee = db.query(Mentee).filter(Mentee.id == mentee_id).first()
     if not mentee:
         raise HTTPException(status_code=404, detail="mentee not found")
-    for field, value in payload.model_dump(exclude_none=True, exclude={"skills"}).items():
+    for field, value in payload.model_dump(exclude_none=True).items():
         setattr(mentee, field, value)
     db.commit()
     db.refresh(mentee)
