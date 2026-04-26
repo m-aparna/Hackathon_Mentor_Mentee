@@ -9,7 +9,7 @@ def test_create_mentee_success(client):
             "email": "new.mentee@example.com",
             "role": "mentee",
             "department": "Engineering",
-            "skills": ["python"],
+            "skills": ["python", "AI"],
         },
     )
 
@@ -19,7 +19,7 @@ def test_create_mentee_success(client):
     assert body["email"] == "new.mentee@example.com"
     assert body["role"] == "mentee"
     assert body["department"] == "Engineering"
-    assert body["skills"] == []
+    assert body["skills"] == ["python", "AI"]
 
 
 def test_create_mentee_duplicate_email(client, seed_mentee):
@@ -30,6 +30,7 @@ def test_create_mentee_duplicate_email(client, seed_mentee):
             "email": seed_mentee.email,
             "role": "mentee",
             "department": "Engineering",
+            "skills": ["python", "AI"],
         },
     )
 
@@ -63,7 +64,7 @@ def test_get_mentee_not_found(client):
 def test_update_mentee_success(client, seed_mentee):
     response = client.patch(
         f"/mentees/{seed_mentee.id}",
-        json={"name": "Updated Mentee", "department": "Product"},
+        json={"name": "Updated Mentee", "department": "Product", "Skils": ["python", "AI"]},
     )
 
     assert response.status_code == status.HTTP_200_OK
@@ -71,6 +72,7 @@ def test_update_mentee_success(client, seed_mentee):
     assert body["name"] == "Updated Mentee"
     assert body["department"] == "Product"
     assert body["email"] == seed_mentee.email
+    assert body["skills"] == ["python", "AI"]
 
 
 def test_update_mentee_not_found(client):

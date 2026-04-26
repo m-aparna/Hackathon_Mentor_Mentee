@@ -9,7 +9,7 @@ def test_create_mentor_success(client):
             "email": "new.mentor@example.com",
             "role": "mentor",
             "department": "Platform",
-            "skills": ["coaching"],
+            "skills": ["DevOps", "python", "GKE"],
         },
     )
 
@@ -17,7 +17,7 @@ def test_create_mentor_success(client):
     body = response.json()
     assert body["name"] == "New Mentor"
     assert body["role"] == "mentor"
-    assert body["skills"] == []
+    assert body["skills"] == ["DevOps", "python", "GKE"]
 
 
 def test_create_mentor_duplicate_email(client, seed_mentor):
@@ -61,13 +61,14 @@ def test_get_mentor_not_found(client):
 def test_update_mentor_success(client, seed_mentor):
     response = client.patch(
         f"/mentors/{seed_mentor.id}",
-        json={"name": "Updated Mentor", "department": "Data"},
+        json={"name": "Updated Mentor", "department": "Data", "skills": ["DevOps", "python", "GKE"],},
     )
 
     assert response.status_code == status.HTTP_200_OK
     body = response.json()
     assert body["name"] == "Updated Mentor"
     assert body["department"] == "Data"
+    assert body["skills"]== ["DevOps", "python", "GKE"]
 
 
 def test_update_mentor_not_found(client):
