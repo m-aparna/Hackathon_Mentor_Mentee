@@ -100,7 +100,7 @@ def update_progress_log(
     if not log:
         raise HTTPException(status_code=404, detail="Progress log not found")
 
-    # ✅ Validate progress_percent if provided
+    # Validate progress_percent if provided
     if payload.progress_percent is not None:
         if not 0 <= payload.progress_percent <= 100:
             raise HTTPException(
