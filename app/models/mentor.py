@@ -6,6 +6,7 @@ import enum
 
 class UserRole(str, enum.Enum):
     mentor = "mentor"
+    mentee = "mentee"
 
 
 class Mentor(Base):
