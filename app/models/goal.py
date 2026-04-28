@@ -20,9 +20,9 @@ class Goal(Base):
     description = Column(Text, nullable=True)
     status = Column(Enum(GoalStatus), default=GoalStatus.not_started)
 
-    # Relationships
     mentorship = relationship("Mentorship", back_populates="goals")
     progress_logs = relationship("ProgressLog", back_populates="goal", cascade="all, delete-orphan")
+    resources = relationship("Resource", secondary="goal_resources", back_populates="goals")
 
 
 class ProgressLog(Base):
@@ -33,5 +33,4 @@ class ProgressLog(Base):
     progress_percent = Column(Integer, default=0)
     update_text = Column(Text, nullable=True)
 
-    # Relationships
     goal = relationship("Goal", back_populates="progress_logs")
