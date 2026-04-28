@@ -307,7 +307,7 @@ Or from inside the `app` folder:
 
 ```bash
 uvicorn main:app --reload
-
+```
 
 Visit **http://localhost:8000/docs** for the interactive Swagger UI.
 
