@@ -6,7 +6,7 @@ from app.models.mentorship import Mentorship
 from app.models.goal import Goal, ProgressLog
 from app.schemas.goal import (
     GoalCreate, GoalUpdate, GoalResponse,
-    ProgressLogCreate, ProgressLogResponse,
+    ProgressLogCreate, ProgressLogUpdate, ProgressLogResponse,
 )
 
 router = APIRouter(tags=["Goals"])
@@ -88,6 +88,32 @@ def create_progress_log(payload: ProgressLogCreate, db: Session = Depends(get_db
 # @progress_router.get("/goal/{goal_id}", response_model=List[ProgressLogResponse])
 # def get_logs_for_goal(goal_id: int, db: Session = Depends(get_db)):
 #     return db.query(ProgressLog).filter(ProgressLog.goal_id == goal_id).all()
+
+
+@progress_router.patch("/{log_id}", response_model=ProgressLogResponse)
+def update_progress_log(
+    log_id: int,
+    payload: ProgressLogUpdate,
+    db: Session = Depends(get_db)
+):
+    log = db.query(ProgressLog).filter(ProgressLog.id == log_id).first()
+    if not log:
+        raise HTTPException(status_code=404, detail="Progress log not found")
+
+    # Validate progress_percent if provided
+    if payload.progress_percent is not None:
+        if not 0 <= payload.progress_percent <= 100:
+            raise HTTPException(
+                status_code=400,
+                detail="progress_percent must be between 0 and 100"
+            )
+
+    for field, value in payload.model_dump(exclude_none=True).items():
+        setattr(log, field, value)
+
+    db.commit()
+    db.refresh(log)
+    return log
 
 
 @progress_router.delete("/{log_id}", status_code=status.HTTP_204_NO_CONTENT)

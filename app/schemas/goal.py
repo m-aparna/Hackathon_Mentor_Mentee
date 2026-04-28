@@ -32,6 +32,11 @@ class ProgressLogCreate(BaseModel):
     update_text: Optional[str] = None
 
 
+class ProgressLogUpdate(BaseModel):
+    progress_percent: Optional[int] = None
+    update_text: Optional[str] = None
+
+
 class ProgressLogResponse(BaseModel):
     id: int
     goal_id: int
