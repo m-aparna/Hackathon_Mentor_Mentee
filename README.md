@@ -323,10 +323,6 @@ Open:
 - Swagger UI: `http://localhost:8000/docs`
 - Health check: `http://localhost:8000/health`
 
-```bash
-CREATE DATABASE IF NOT EXISTS mentorship_db
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
 
 
 ## API Overview
