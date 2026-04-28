@@ -19,8 +19,7 @@ class Mentee(Base):
     department = Column(String(100), nullable=True)
     skills=Column(JSON, nullable=False, default= list)
 
-    # # Relationships
-    # skills = relationship("UserSkill", back_populates="user", cascade="all, delete-orphan")
+    #  Relationships
     mentorship_as_mentee = relationship(
         "Mentorship", foreign_keys="Mentorship.mentee_id", back_populates="mentee"
     )

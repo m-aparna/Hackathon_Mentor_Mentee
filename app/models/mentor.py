@@ -20,7 +20,6 @@ class Mentor(Base):
     skills=Column(JSON, nullable=False, default= list)
 
     # # Relationships
-    # skills = relationship("UserSkill", back_populates="user", cascade="all, delete-orphan")
     mentorship_as_mentor = relationship(
         "Mentorship", foreign_keys="Mentorship.mentor_id", back_populates="mentor"
     )
