@@ -13,6 +13,8 @@ def test_create_mentorship_success(client, seed_mentor, seed_mentee):
     assert body["mentor_id"] == seed_mentor.id
     assert body["mentee_id"] == seed_mentee.id
     assert body["status"] == "active"
+    assert body["department"] == "Engineering"
+    assert body["skills"] == ["python"]
 
 
 def test_create_mentorship_rejects_missing_mentor(client, seed_mentee):
@@ -94,6 +96,8 @@ def test_list_mentorships(client, seed_mentorship):
     body = response.json()
     assert len(body) == 1
     assert body[0]["id"] == seed_mentorship.id
+    assert body[0]["department"] == "Engineering"
+    assert body[0]["skills"] == ["python"]
 
 
 def test_get_mentorship_success(client, seed_mentorship):
@@ -117,7 +121,10 @@ def test_update_mentorship_success(client, seed_mentorship):
     )
 
     assert response.status_code == status.HTTP_200_OK
-    assert response.json()["status"] == "completed"
+    body = response.json()
+    assert body["status"] == "completed"
+    assert body["department"] == "Engineering"
+    assert body["skills"] == ["python"]
 
 
 def test_update_mentorship_not_found(client):

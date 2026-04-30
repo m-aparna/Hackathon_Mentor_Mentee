@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import datetime
 from app.models.mentorship import MentorshipStatus
 
@@ -21,5 +21,7 @@ class MentorshipResponse(BaseModel):
     mentee_id: int
     start_date: Optional[datetime.date] = None
     status: MentorshipStatus
+    department: str
+    skills: List[str]
 
     model_config = {"from_attributes": True}

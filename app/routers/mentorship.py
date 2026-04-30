@@ -25,7 +25,8 @@ def create_mentorship(payload: MentorshipCreate, db: Session = Depends(get_db)):
 
     mentor_skills = set(mentor.skills or [])
     mentee_skills = set(mentee.skills or [])
-    if not mentor_skills.intersection(mentee_skills):
+    shared_skills = sorted(mentor_skills.intersection(mentee_skills))
+    if not shared_skills:
         raise HTTPException(status_code=400, detail="Mentor and mentee must share at least one skill")
 
     existing = db.query(Mentorship).filter(
@@ -36,7 +37,11 @@ def create_mentorship(payload: MentorshipCreate, db: Session = Depends(get_db)):
     if existing:
         raise HTTPException(status_code=400, detail="Active mentorship already exists between these users")
 
-    m = Mentorship(**payload.model_dump())
+    payload_data = payload.model_dump()
+    payload_data["department"] = mentor.department
+    payload_data["skills"] = shared_skills
+
+    m = Mentorship(**payload_data)
     db.add(m)
     db.commit()
     db.refresh(m)
