@@ -59,34 +59,3 @@ erDiagram
     MENTORSHIP }o--o{ RESOURCE : recommends
     GOAL }o--o{ RESOURCE : supports
 ```
-
-## Flow Diagram
-
-```mermaid
-flowchart TD
-    A["Create Mentor"] --> C["Create Mentorship"]
-    B["Create Mentee"] --> C
-    C --> D["Create Goal"]
-    C --> E["Attach General Resource to Mentorship"]
-    D --> F["Attach Goal-Specific Resource"]
-    D --> G["Add Progress Log"]
-    G --> H["Track Goal Progress"]
-    E --> I["Continuous Improvement Support"]
-    F --> J["Focused Goal Learning"]
-    H --> K["Mentor Reviews Growth"]
-    I --> K
-    J --> K
-```
-
-## Demo Explanation
-
-- `Mentorship -> Resource` means a general recommendation for ongoing improvement.
-- `Goal -> Resource` means a targeted learning resource for one specific goal.
-- `ProgressLog` shows how the mentee is moving toward a goal over time.
-
-Example:
-
-- Mentorship resource: `PPT Design Basics`
-- Goal: `Learn FastAPI`
-- Goal resource: `FastAPI Tutorial`
-
