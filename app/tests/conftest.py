@@ -1,4 +1,5 @@
 import os
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -6,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 os.environ.setdefault("DATABASE_URL", "sqlite:///./test_bootstrap.db")
+
 from app.database import Base, get_db
 from app.main import app
 from app.models import goal, mentee, mentor, mentorship, resource
@@ -68,6 +70,7 @@ def seed_mentor(db_session):
         email="seed.mentor@example.com",
         role=MentorRole.mentor,
         department="Engineering",
+        skills=["python", "ai"],
     )
     db_session.add(mentor_obj)
     db_session.commit()
@@ -81,7 +84,8 @@ def seed_mentee(db_session):
         name="Seed Mentee",
         email="seed.mentee@example.com",
         role=MenteeRole.mentee,
-        department="Design",
+        department="Engineering",
+        skills=["python", "sql"],
     )
     db_session.add(mentee_obj)
     db_session.commit()

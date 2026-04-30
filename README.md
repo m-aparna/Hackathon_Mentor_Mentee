@@ -225,6 +225,11 @@ Pydantic validation, designed for easy extension and testing.
 ```bash
     git clone https://github.com/m-aparna/Hackathon_Mentor_Mentee.git
     cd Hackathon_Mentor_Mentee
+```
+
+```
+    git remote add origin <https://github.com/m-aparna/Hackathon_Mentor_Mentee.git>
+    Connect to remote repository
     
 ```
 

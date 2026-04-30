@@ -20,6 +20,14 @@ def create_mentorship(payload: MentorshipCreate, db: Session = Depends(get_db)):
     if not mentee or mentee.role != UserRole.mentee:
         raise HTTPException(status_code=400, detail="Mentee not found or user is not a mentee")
 
+    if mentor.department != mentee.department:
+        raise HTTPException(status_code=400, detail="Mentor and mentee must belong to the same department")
+
+    mentor_skills = set(mentor.skills or [])
+    mentee_skills = set(mentee.skills or [])
+    if not mentor_skills.intersection(mentee_skills):
+        raise HTTPException(status_code=400, detail="Mentor and mentee must share at least one skill")
+
     existing = db.query(Mentorship).filter(
         Mentorship.mentor_id == payload.mentor_id,
         Mentorship.mentee_id == payload.mentee_id,
