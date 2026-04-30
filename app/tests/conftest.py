@@ -95,7 +95,13 @@ def seed_mentee(db_session):
 
 @pytest.fixture(scope="function")
 def seed_mentorship(db_session, seed_mentor, seed_mentee):
-    mentorship_obj = Mentorship(mentor_id=seed_mentor.id, mentee_id=seed_mentee.id)
+    shared_skills = sorted(set(seed_mentor.skills or []).intersection(seed_mentee.skills or []))
+    mentorship_obj = Mentorship(
+        mentor_id=seed_mentor.id,
+        mentee_id=seed_mentee.id,
+        department=seed_mentor.department,
+        skills=shared_skills,
+    )
     db_session.add(mentorship_obj)
     db_session.commit()
     db_session.refresh(mentorship_obj)

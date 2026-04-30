@@ -467,11 +467,11 @@ Goal statuses:
 
 ## Future Enhancements:
 
-- **Authentication** – Add OAuth2 / JWT using `fastapi.security`
+- **Authentication** – Add login authentication
 - **Frontend** – Add UI for better visibility 
+- **Goal-Resource** relenvance validation using skills, or tags.
 - **Mentor Recommendation** Engine based on skills match
-- **At-Risk mentee Detection** - A mentee is flagged when their active mentorship has had no session in the last N days (default 14) AND their average goal progress is below 30%.
+- **Flagging** - A mentee is flagged when their active mentorship has had no session in the last N days (default 14) AND their average goal progress is below 30%.
 - **Mentor Dashboard** Returns the mentor's active mentees with per-mentee summaries:           total goals, completed goals, average progress, and last session date.
-
 - **Session scheduling and feedback tracking**
 - **HR** user for getting visibilty on mentorship and progress
