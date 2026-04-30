@@ -1,5 +1,4 @@
 from fastapi import status
-from app.models.mentor import Mentor, UserRole as MentorRole
 from app.models.mentee import Mentee, UserRole as MenteeRole
 
 
@@ -34,6 +33,48 @@ def test_create_mentorship_rejects_missing_mentee(client, seed_mentor):
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.json()["detail"] == "Mentee not found or user is not a mentee"
+
+
+def test_create_mentorship_rejects_department_mismatch(client, db_session, seed_mentor):
+    mentee = Mentee(
+        name="Other Department Mentee",
+        email="other.department@example.com",
+        role=MenteeRole.mentee,
+        department="Design",
+        skills=["python"],
+    )
+    db_session.add(mentee)
+    db_session.commit()
+    db_session.refresh(mentee)
+
+    response = client.post(
+        "/mentorships/",
+        json={"mentor_id": seed_mentor.id, "mentee_id": mentee.id},
+    )
+
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert response.json()["detail"] == "Mentor and mentee must belong to the same department"
+
+
+def test_create_mentorship_rejects_when_no_skill_overlaps(client, db_session, seed_mentor):
+    mentee = Mentee(
+        name="No Skill Match",
+        email="no.skill.match@example.com",
+        role=MenteeRole.mentee,
+        department="Engineering",
+        skills=["ppt", "communication"],
+    )
+    db_session.add(mentee)
+    db_session.commit()
+    db_session.refresh(mentee)
+
+    response = client.post(
+        "/mentorships/",
+        json={"mentor_id": seed_mentor.id, "mentee_id": mentee.id},
+    )
+
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert response.json()["detail"] == "Mentor and mentee must share at least one skill"
 
 
 def test_create_mentorship_rejects_duplicate_active_pair(client, seed_mentorship):
